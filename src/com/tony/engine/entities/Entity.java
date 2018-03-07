@@ -50,7 +50,18 @@ public class Entity implements Renderable{
 	public Color getColor(){return color;}
 	public Color getBorderColor(){return borderColor;}
 	public boolean isDebug(){return debug;}
+	
+	public double distanceX(Entity e) {
+		return Math.pow(Math.pow(e.x-x,2.0),0.5);
+	}
+	public double distanceY(Entity e) {
+		return Math.pow(Math.pow(e.y-y,2.0),0.5);
+	}
+	public double distance(Entity e) {
+		return Math.pow(Math.pow(e.y-y,2.0)+Math.pow(e.x-e.y,2.0),0.5);
+	}
 
+	
 	public void tick(double delta){
 		oldX = getX();
 		oldY = getY();

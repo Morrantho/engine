@@ -91,26 +91,28 @@ public class PhysEnt extends Entity implements Collidable{
 
 		yV += gravity*delta;
 
-		left.x = (int)getX();
-		left.y = (int)getY()+8;
-		left.w = 2;
-		left.h = (int)getH()-16;
-
-		top.x = (int)getX()+4;
-		top.y = (int)getY();
-		top.w = (int)getW()-8;
-		top.h = 4;
-
-		right.x=(int)getX()+(int)getW()-2;
-		right.y=(int)getY()+8;
-		right.w=2;
-		right.h=(int)getH()-16;
-
-		bottom.x=(int)getX()+4;
-		bottom.y=(int)getTotalH()-2;
-		bottom.w=(int)getW()-8;
-		bottom.h=4;
-
+		if(left != null && right != null && top != null && bottom != null) {
+			left.x = (int)getX();
+			left.y = (int)getY()+8;
+			left.w = 2;
+			left.h = (int)getH()-16;
+	
+			top.x = (int)getX()+4;
+			top.y = (int)getY();
+			top.w = (int)getW()-8;
+			top.h = 4;
+	
+			right.x=(int)getX()+(int)getW()-2;
+			right.y=(int)getY()+8;
+			right.w=2;
+			right.h=(int)getH()-16;
+	
+			bottom.x=(int)getX()+4;
+			bottom.y=(int)getTotalH()-2;
+			bottom.w=(int)getW()-8;
+			bottom.h=4;
+		}
+		
 		collide(delta);
 	}
 

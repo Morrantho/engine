@@ -5,6 +5,7 @@ import java.lang.Thread;
 
 import com.tony.engine.behaviors.Togglable;
 import com.tony.engine.entities.Entity;
+import com.tony.engine.entities.NPC;
 import com.tony.engine.entities.Player;
 import com.tony.engine.gui.Window;
 import com.tony.engine.util.Resources;
@@ -33,7 +34,6 @@ public class Game implements Runnable,Togglable{
 		windowHandle.setW(width);
 		windowHandle.setH(height);
 
-		System.out.println( windowHandle.getW());
 		start();
 
         Player p = new Player(
@@ -42,21 +42,27 @@ public class Game implements Runnable,Togglable{
         	128,
         	0
         );
-        p.setW(24);
-        p.setH(48);
         // p.debug=false;
         // p.setGravity(0);
 
+        NPC n = new NPC(
+        	Resources.SHEET_SAMUS,
+        	Resources.SEQ_SAMUS_IDLE,
+        	512,
+        	0
+        );
+        
+        // Left wall
+        for(int i=0;i<32*32;i+=32) {
+        	new Entity(0,-i+512,32,32,new Color(0,255,0));
+        }
+        
         for(int i=0;i<32*32;i+=32){
         	new Entity(i,512,32,32,new Color(0,255,0));
         }
-
-        for(int i=0;i<32*8;i+=32){
-        	new Entity(i+128,448,32,32,new Color(0,255,0));
-        }
-
-        for(int i=0;i<32*8;i+=32){
-        	new Entity(i+256,340,32,32,new Color(0,255,0));
+        
+        for(int i=0;i<32*32;i+=32) {
+        	new Entity(1024,-i+512,32,32,new Color(0,255,0));
         }
 	}
 

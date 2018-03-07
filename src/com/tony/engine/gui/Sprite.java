@@ -28,7 +28,8 @@ public class Sprite{
     }
 
 	public void render(Graphics g){
-		g.drawImage(image,(int)e.getX(),(int)e.getY(),(int)e.getW(),(int)e.getH(),null);
+		if(e != null)
+			g.drawImage(image,(int)e.getX(),(int)e.getY(),(int)e.getW(),(int)e.getH(),null);
 	}
 
     // render animations here.	

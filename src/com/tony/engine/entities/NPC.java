@@ -13,10 +13,11 @@ import com.tony.engine.gui.SpriteSheet;
 public class NPC extends PhysEnt implements Movable{
 	private int direction     = 0;
 	private int lastDir       = 1;
+	private int range         = 128; // Alert range
 	private double speed      = 64.0;
 	private double damping    = speed * 8;
 	private double cap        = speed / 32.0;
-	private double jumpHeight = 6.0;
+	private double jumpHeight = 12.0;
 	private Sequence sequence;
 
 	public NPC(SpriteSheet sheet,Sequence sequence,int x,int y){
@@ -41,6 +42,9 @@ public class NPC extends PhysEnt implements Movable{
 	public void setSpeed(double speed){this.speed=speed;}
 	public double getSpeed(){return speed;}
 
+	public void setRange(int range) {this.range=range;}
+	public int getRange() {return range;}
+
 	public double getJumpHeight(){return jumpHeight;}
 
 	public void walk(double delta){
@@ -50,6 +54,20 @@ public class NPC extends PhysEnt implements Movable{
 			setXVel(getXVel() / (1+damping*delta));
 		}else if(direction == 1 && getXVel() < cap){ // Right
 			setXVel(getXVel()+speed*delta);
+		}
+	}
+
+	public void followPlayer(){
+		Player p = Entities.findPlayer();
+
+		if(distanceX(p) < range){
+			if(getX()+getW() < p.getX()) {
+				setDirection(1);
+			}else if(getX()> p.getX()) {
+				setDirection(-1);
+			}
+		}else {
+			setDirection(0);
 		}
 	}
 
@@ -63,13 +81,14 @@ public class NPC extends PhysEnt implements Movable{
 
 	public void tick(double delta){
 		super.tick(delta);
+		followPlayer();
 		walk(delta);
 		// jump(delta);
 	}
 
 	public void animate(){
 
-	}	
+	}
 
 	public void render(Graphics g){
 		super.render(g);

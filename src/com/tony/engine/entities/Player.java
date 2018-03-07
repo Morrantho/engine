@@ -17,6 +17,7 @@ public class Player extends NPC{
 	public Player(SpriteSheet sheet,Sequence sequence,int x,int y){
 		super(sheet,sequence,x,y);
 		//Attach keyboard input to player entity
+		setSpeed(1024.0);
 		Window.inputHandle.setEntity(this);
 	}
 
@@ -35,7 +36,7 @@ public class Player extends NPC{
 		}else{
 			setDirection(0);
 		}
-
+		
 		if(Input.isDown("space")){
 			jump(delta);
 		}

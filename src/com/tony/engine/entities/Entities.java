@@ -26,4 +26,8 @@ public abstract class Entities{
 		}
 		return null;
 	}
+	
+	public static Player findPlayer() {
+		return (Player) findByClass("Player");
+	}
 }
